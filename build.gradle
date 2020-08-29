@@ -1,0 +1,20 @@
+plugins {
+	id 'groovy'
+	id 'java'
+}
+
+group 'io.github.hdfg159'
+version '1.0-SNAPSHOT'
+
+repositories {
+	maven{ url 'https://maven.aliyun.com/repository/public'}
+	mavenCentral()
+}
+
+dependencies {
+	compile 'io.vertx:vertx-web-client:3.9.2'
+	compile 'io.vertx:vertx-rx-java2:3.9.2'
+	
+	testCompile 'org.codehaus.groovy:groovy-all:3.0.5'
+	testCompile group: 'junit', name: 'junit', version: '4.12'
+}
