@@ -21,7 +21,7 @@ class RobotMessagesTest extends GroovyTestCase {
 		def result = RobotMessages
 				.text("hello world")
 				.mentionedMobileList([mobile])
-				.send(key)
+				.rxSend(key)
 				.blockingGet()
 		
 		assertSuc(result)
@@ -32,7 +32,7 @@ class RobotMessagesTest extends GroovyTestCase {
 		def result = RobotMessages
 				.text(text)
 				.mentionedMobileList([mobile])
-				.send(key)
+				.rxSend(key)
 				.blockingGet()
 		
 		assertSuc(result)
@@ -43,7 +43,7 @@ class RobotMessagesTest extends GroovyTestCase {
 		def md5 = "B23A6657BE07FCFCB6589C2022821B4C"
 		def result = RobotMessages
 				.img(base64, md5)
-				.send(key)
+				.rxSend(key)
 				.blockingGet()
 		assertSuc(result)
 	}
@@ -59,7 +59,7 @@ class RobotMessagesTest extends GroovyTestCase {
 		
 		def result = RobotMessages
 				.imgArticle(articles)
-				.send(key)
+				.rxSend(key)
 				.blockingGet()
 		assertSuc(result)
 		
@@ -73,7 +73,7 @@ class RobotMessagesTest extends GroovyTestCase {
 		shouldFail {
 			RobotMessages
 					.imgArticle(articlesMany)
-					.send(key)
+					.rxSend(key)
 					.blockingGet()
 		}
 	}
@@ -81,13 +81,13 @@ class RobotMessagesTest extends GroovyTestCase {
 	void testMarkdown() {
 		def result = RobotMessages
 				.markdown("> test hello world")
-				.send(key)
+				.rxSend(key)
 				.blockingGet()
 		assertSuc(result)
 		
 		def longText = RobotMessages
 				.markdown((1..2999).collect {it}.join(""))
-				.send(key)
+				.rxSend(key)
 				.blockingGet()
 		assertSuc(longText)
 	}
@@ -96,25 +96,25 @@ class RobotMessagesTest extends GroovyTestCase {
 		shouldFail {
 			RobotMessages
 					.file(new File("C:\\Users\\ZZY2019\\Desktop\\Temp"))
-					.send(key)
+					.rxSend(key)
 					.blockingGet()
 		}
 		
 		shouldFail {
 			RobotMessages
 					.file(new File("C:\\Users\\ZZY2019\\Desktop\\Temp\\uuid.asdasd"))
-					.send(key)
+					.rxSend(key)
 					.blockingGet()
 		}
 		
 		def result = RobotMessages
 				.file(new File("C:\\Users\\ZZY2019\\Desktop\\Temp\\1.html"))
-				.send(key)
+				.rxSend(key)
 				.blockingGet()
 		assertSuc(result)
 	}
 	
-	private void assertSuc(JsonObject result) {
+	private static void assertSuc(JsonObject result) {
 		assert result
 		assert result.containsKey("errcode")
 		assert result.getInteger("errcode") == 0

@@ -79,7 +79,7 @@ public class RobotFileMsg extends AbstractRobotMsgBody<RobotTextMsg> {
 	}
 
 	@Override
-	public Maybe<JsonObject> send(String key) {
+	public Maybe<JsonObject> rxSend(String key) {
 		valid();
 		// 重写父类 send 方法以上传文件
 		MultipartForm form = MultipartForm.create()
@@ -93,7 +93,7 @@ public class RobotFileMsg extends AbstractRobotMsgBody<RobotTextMsg> {
 						.map(entries -> entries.getString("media_id"))
 						.map(mediaId -> {
 							this.mediaId = mediaId;
-							return super.send(key);
+							return super.rxSend(key);
 						})
 						.orElse(Maybe.empty()));
 	}

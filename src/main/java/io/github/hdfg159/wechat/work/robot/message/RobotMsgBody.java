@@ -47,5 +47,5 @@ public interface RobotMsgBody {
 	 *
 	 * @return String 返回结果
 	 */
-	Maybe<JsonObject> send(String key);
+	Maybe<JsonObject> rxSend(String key);
 }

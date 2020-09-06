@@ -59,7 +59,7 @@ public abstract class AbstractRobotMsgBody<E extends AbstractRobotMsgBody<E>> im
 	}
 
 	@Override
-	public Maybe<JsonObject> send(String key) {
+	public Maybe<JsonObject> rxSend(String key) {
 		return CLIENT.postAbs(SEND_MESSAGE_URL)
 				.addQueryParam("key", key)
 				.rxSendJsonObject(buildRequestParam())
